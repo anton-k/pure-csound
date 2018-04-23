@@ -97,7 +97,7 @@ endop
 ; kTone - color of the low-pass filter (frequency for the filter)
 ; kRandomSpread - radius of noisy reading from the tape [0.5, Inf] - relates to "tape age".
 ;   smaller - the better tape is
-opcode TapeEcho, a, akkkkk
+opcode TapeEcho1, a, akkkkk
   aIn, kDelay, kEchoGain, kFbGain, kTone, kRandomSpread xin
 
   aDummy delayr 16
@@ -139,3 +139,26 @@ opcode TapeEcho4, a, akkkkk
   xout aOut
 endop
 
+
+opcode tapeReadBatch, a, akkii
+  aIn, kDelay, kRandomSpread, iSize, iStart xin
+
+  if iStart <= iSize then
+    acall tapeReadBatch aIn, kDelay, kRandomSpread, iSize, iStart + 1
+  else
+    acall = 0
+  endif
+
+  iScale = iStart
+  aEcho tapeRead aIn, kDelay * iScale, kRandomSpread
+  xout acall + aEcho / iScale
+endop
+
+opcode TapeEchoN, a, akkkkki
+  aIn, kDelay, kEchoGain, kFbGain, kTone, kRandomSpread, iSize xin
+  aDummy delayr (16 * iSize)
+  aEcho tapeReadBatch aIn, kDelay, kRandomSpread, iSize, 1
+  aOut = aIn + kEchoGain * aEcho
+  tapeWrite aIn, aOut, kFbGain
+  xout aOut
+endop

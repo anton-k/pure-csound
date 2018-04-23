@@ -34,8 +34,8 @@ kMix = 0.6
 
 kRnd oscili 0.25, 0.125
 
-aoL  TapeEcho4 aL, 0.5, 0.47, 0.6, 7500, 1 + kRnd
-aoR  TapeEcho4 aR, 0.75, 0.47, 0.5, 7500, 1 - kRnd
+aoL  TapeEchoN aL, 0.3, 0.27, 0.4, 7500, 0.8 + kRnd, 4
+aoR  TapeEchoN aR, 0.5, 0.27, 0.35, 7500, 0.8 - kRnd, 4
 
 aWetL, aWetR  reverbsc aoL, aoR, 0.7, 10000
      outs kMix * (aoL + 0.35 * aWetL), kMix * (aoR + 0.35 * aWetR)
@@ -49,8 +49,8 @@ endin
 <CsScore>
 
 f0 120000
-;i 1 0  -1    ; plays file
-i 2 0  -1     ; plays live from input
+i 1 0  -1    ; plays file
+;i 2 0  -1     ; plays live from input
 i 100 0 -1
 e
 
