@@ -4,7 +4,7 @@
 ;
 ; Stere version of liveRow. Toggle of stereo-audio clips syncronised with BPM.
 ;
-; > aOut liveRow iTabSize, iLeftTabs, iRightTabs, iBpm, iBeatDur, kUserIndex, iAuxParams
+; > aOut liveRows iTabSize, iLeftTabs, iRightTabs, iBpm, iBeatDur, kUserIndex, iAuxParams
 ;
 ; * iTabSize - how many audio clips in the row
 ; * iLeftTabs, iRightTabs - tables that contains indices to left and right channels
